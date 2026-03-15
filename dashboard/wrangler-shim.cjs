@@ -33,14 +33,25 @@ if (!realWranglerPath) {
   process.exit(1);
 }
 
+// Detect if we are running inside Cloudflare Pages environment
+const isCloudflarePages = process.env.CF_PAGES === '1';
+
 // Check if we are running incorrect Workers commands
 const isIncorrectDeploy = args[0] === 'deploy' && args[1] !== 'pages';
 const isIncorrectVersions = args[0] === 'versions' && args[1] === 'upload';
 
 if (isIncorrectDeploy || isIncorrectVersions) {
+  if (isCloudflarePages) {
+    console.log('\n✅ NexusOS Wrangler Shim: Detected Cloudflare Pages environment.');
+    console.log('💡 Skipping manual deploy command. Cloudflare will deploy the build artifacts automatically.\n');
+    process.exit(0);
+  }
+
   console.log(`\n🚀 NexusOS Wrangler Shim: Intercepted "${args.join(' ')}".`);
   console.log('🔄 Redirecting to "wrangler pages deploy" for this project...\n');
   
+  // Note: We use --project-name if we suspect it might be different, 
+  // but better to let it use wrangler.toml or be silent.
   const result = spawnSync('node', [realWranglerPath, 'pages', 'deploy', ...args.slice(1)], {
     stdio: 'inherit',
     shell: true
