@@ -11,7 +11,7 @@ class_name = "MissionFeed"
 
 [[migrations]]
 tag = "v1"
-new_classes = ["MissionFeed"]
+new_sqlite_classes = ["MissionFeed"]
 
 [[workflows]]
 name = "nexusos-pipeline"
@@ -28,10 +28,6 @@ database_id = "6c6be3a0-d1ab-43b8-b391-18fdd6927974"
 binding = "KV"
 id = "5eb1f9d83e9c499b8f6d8861edb6eac2"
 preview_id = "54eeb867792e4a05b9cf7f25c094afdd"
-
-[[r2_buckets]]
-binding = "R2"
-bucket_name = "nexusos-artifacts"
 
 [vars]
 CONNECTORS_URL = "https://nexusos-connectors.nitishkumar44470.workers.dev"

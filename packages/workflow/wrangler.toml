@@ -20,10 +20,6 @@ binding = "KV"
 id = "5eb1f9d83e9c499b8f6d8861edb6eac2"
 preview_id = "54eeb867792e4a05b9cf7f25c094afdd"
 
-[[r2_buckets]]
-binding = "R2"
-bucket_name = "nexusos-artifacts"
-
 [vars]
 ENVIRONMENT = "production"
 CONNECTORS_URL = "https://nexusos-connectors.nitishkumar44470.workers.dev"

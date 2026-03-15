@@ -1,2 +1,10 @@
 // packages/workflow/src/index.ts
-export { NexusOSPipeline } from './pipeline';
+import { NexusOSPipeline } from './pipeline';
+
+export { NexusOSPipeline };
+
+export default {
+  async fetch(request: Request) {
+    return new Response("NexusOS Workflow Entrypoint");
+  }
+};
