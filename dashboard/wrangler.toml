@@ -1,5 +1,6 @@
 name = "nexusos-dashboard"
 compatibility_date = "2026-01-01"
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
 NEXT_PUBLIC_GATEWAY_URL = "https://api.nexusos.dev"
