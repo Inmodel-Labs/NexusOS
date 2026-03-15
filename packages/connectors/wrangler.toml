@@ -21,3 +21,6 @@ database_id = "6c6be3a0-d1ab-43b8-b391-18fdd6927974"
 
 [vars]
 ENVIRONMENT = "production"
+
+[observability]
+enabled = true

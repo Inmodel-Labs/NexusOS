@@ -28,3 +28,6 @@ bucket_name = "nexusos-artifacts"
 [vars]
 CONNECTORS_URL = "https://nexusos-connectors.nitishkumar44470.workers.dev"
 OPENCLAW_GATEWAY_URL = "https://nexus-openclaw.nitishkumar44470.workers.dev"
+
+[observability]
+enabled = true
