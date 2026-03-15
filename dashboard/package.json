@@ -4,14 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "deploy": "wrangler pages deploy",
-    "build": "next build && chmod +x wrangler-shim.cjs",
-    "postinstall": "mkdir -p node_modules/.bin && ln -sf ../../wrangler-shim.cjs node_modules/.bin/wrangler"
-  },
-  "bin": {
-    "wrangler": "./wrangler-shim.cjs"
+    "lint": "eslint"
   },
   "dependencies": {
     "next": "16.1.6",
