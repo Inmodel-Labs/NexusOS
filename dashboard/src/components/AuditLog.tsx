@@ -1,17 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { listMissions } from '../../lib/gateway';
-
-interface MissionTask {
-  id: string;
-  instruction: string;
-  repo_url: string | null;
-  phase: string;
-}
+import { listMissions, type Mission } from '../../lib/gateway';
 
 export default function AuditLog() {
-  const [missions, setMissions] = useState<MissionTask[]>([]);
+  const [missions, setMissions] = useState<Mission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

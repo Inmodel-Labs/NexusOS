@@ -18,9 +18,12 @@ export interface MissionPayload {
 export interface Mission {
   id: string;
   instruction: string;
-  repo_url?: string;
+  repo_url?: string | null;
   phase: string;
   status: 'ACTIVE' | 'BLOCKED' | 'AWAITING_APPROVAL' | 'COMPLETE' | 'REJECTED' | 'FAILED';
+  openclaw_session_id?: string | null;
+  openclaw_channel?: string | null;
+  source_user_id?: string | null;
   created_at: string;
   updated_at: string;
 }
