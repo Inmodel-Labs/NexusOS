@@ -1,18 +1,32 @@
 // packages/gateway/src/index.ts
 import type { Workflow, D1Database, KVNamespace, R2Bucket } from '@cloudflare/workers-types';
-// Cloudflare Worker — REST API for NexusOS
-// Replaces the Rust Axum server endpoints
-
+import { MissionFeed } from './feed';
 import type { Env } from '../../workflow/src/types';
 import { getMission, listMissions, logEvent } from '../../workflow/src/db';
 
+export { MissionFeed };
+
 export interface GatewayEnv extends Env {
-  NEXUSOS_PIPELINE: Workflow;
+  MISSION_FEED: DurableObjectNamespace<MissionFeed>;
 }
 
 export default {
   async fetch(request: Request, env: GatewayEnv): Promise<Response> {
     const url = new URL(request.url);
+
+    // Handle WebSocket upgrade
+    if (url.pathname === '/ws') {
+      const id = env.MISSION_FEED.idFromName('global');
+      const obj = env.MISSION_FEED.get(id);
+      return obj.fetch(request);
+    }
+
+    // Handle broadcast trigger (internal only ideally, but CORS handles dashboard for now)
+    if (url.pathname === '/internal/broadcast' && request.method === 'POST') {
+      const id = env.MISSION_FEED.idFromName('global');
+      const obj = env.MISSION_FEED.get(id);
+      return obj.fetch(request);
+    }
     const cors = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',

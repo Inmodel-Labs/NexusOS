@@ -49,6 +49,17 @@ export async function logEvent(env: Env, event: MissionEvent): Promise<void> {
     event.message,
     event.timestamp,
   ).run();
+
+  // Broadcast to Gateway WebSocket feed
+  try {
+    const gatewayUrl = (env as any).GATEWAY_URL ?? 'https://nexusos-gateway.nitishkumar44470.workers.dev';
+    await fetch(`${gatewayUrl}/internal/broadcast`, {
+      method: 'POST',
+      body: JSON.stringify(event),
+    });
+  } catch (e) {
+    console.error('Failed to broadcast event:', e);
+  }
 }
 
 export async function storePlan(env: Env, taskId: string, plan: string): Promise<void> {

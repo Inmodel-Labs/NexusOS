@@ -5,6 +5,14 @@ compatibility_flags = ["nodejs_compat"]
 
 account_id = "6c9134768cf146bbacd6d541f3b8c8b3"
 
+[[durable_objects.bindings]]
+name = "MISSION_FEED"
+class_name = "MissionFeed"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["MissionFeed"]
+
 [[workflows]]
 name = "nexusos-pipeline"
 binding = "NEXUSOS_PIPELINE"
