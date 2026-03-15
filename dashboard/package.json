@@ -4,9 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "wrangler pages deploy",
+    "build": "next build && chmod +x wrangler-shim.cjs",
+    "postinstall": "mkdir -p node_modules/.bin && ln -sf ../../wrangler-shim.cjs node_modules/.bin/wrangler"
+  },
+  "bin": {
+    "wrangler": "./wrangler-shim.cjs"
   },
   "dependencies": {
     "next": "16.1.6",
@@ -21,6 +26,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^3.114.17"
   }
 }
